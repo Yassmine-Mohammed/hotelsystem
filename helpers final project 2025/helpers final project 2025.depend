@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1739581710 source:d:\helpers\helpers final project 2025\main.cpp
+	<iostream>
+	<thread>
+	<chrono>
+	<windows.h>
+	<cctype>
+
