@@ -16,11 +16,13 @@ void typetext (const string &text)
         cout<<c<<flush;
         this_thread::sleep_for(chrono::milliseconds(25));
         /*flush
-        عشان يرضى يطبع كل حرف لوحده وبعدين ييروح لسطر ال sleep وينام لخمسة وعشرين مللي ثانية*/
+        عشان يرضى يطبع كل حرف لوحده وبعدين ييروح لسطر ال 
+        sleep
+        وينام لخمسة وعشرين مللي ثانية*/
     }
     cout << endl;
 }
-/* نعمل دالة عشان اغير لون الخط في الكونسول */
+// نعمل دالة عشان اغير لون الخط في الكونسول
 int setcolor (int color)
 {
     SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), color);
@@ -28,9 +30,11 @@ int setcolor (int color)
     /*GetStdHandle
     STD_OUTPUT_HANDLE دي عبارة عن دالة بتشبك في الي الاوتبوب اللي طالع في الكونسول عشان تغير فيه حاجة وفي حالتناي دي اسمه بشكل مؤقت
     SetConsoleTextAttribute وبعد كده بتدخله في
+    
     SetConsoleTextAttribute
-    دي بقى دالة جاهزة في الويندوز بتاخد براماترين الاول بيكون لحاجة اللي ععايزة*/
-    /*عايزين بقى دالة تتشك على الان بوت*/
+دي بقى دالة جاهزة في مكتبة الويندوز بتاخد برامترين الاول الحاجة اللي عايز تلونها والتاني رقم اللون اللي انتي عايزه*/
+
+//لازم بقى دالة تتشك على الان بوت انه رقم ومش حاجة تاني
 }
 bool isValidNumber(int &num)
 {
@@ -47,6 +51,34 @@ bool isValidNumber(int &num)
     }
     return true;
 }
+void InventoryManagement()
+{
+    /*تعريف المتغيرات ب
+    map
+    بدل ما تعرف كل متغير لوحده*/
+    // لو عايزة تضيفي حاجة يا ميري ضيفي!!
+    map<string, int> inventory =
+    {
+        {"chicken", 1000},
+        {"rice", 100},
+        {"beef", 1000},
+        {"tomato", 1000},
+        {"onion", 1000},
+        {"celery", 1000},
+        {"lemon", 1000}
+    };
+
+    // عرض المخزون
+    cout << "Welcome to our inventory management system:\n\n";
+    cout << "Our remaining stock:\n";
+    for (auto item : inventory)
+    {
+        cout << item.first << " = " << item.second << endl;
+    }
+}
+
+}
+
 int main()
 {
     typetext("===== Welcome to DOT Hotel Management System! ===== \n \n Please choose an option:\n");
@@ -95,6 +127,7 @@ int main()
     {
         setcolor(5);
         typetext( "\t\t===== Inventory Management ===== \n\n");
+        InventoryManagement();
         break;
     }
     case(4):
@@ -103,6 +136,7 @@ int main()
         typetext ("\t\t===== Bill and Payment ===== \n\n");
         break;
     }
+
     }
     return 0;
 }
