@@ -7,6 +7,8 @@
 //اللي بتتعامل مع الكونسول
 #include <cctype>
 //بتتحقق من نوع الكراكترز
+#include <map>
+//مكتبة الماب
 using namespace std;
 // ولأني انسان موسوس جبت دالة بتعمل ستايل للكتابة عشان يبقى شكلها حلو
 void typetext (const string &text)
@@ -16,25 +18,24 @@ void typetext (const string &text)
         cout<<c<<flush;
         this_thread::sleep_for(chrono::milliseconds(25));
         /*flush
-        عشان يرضى يطبع كل حرف لوحده وبعدين ييروح لسطر ال 
+        عشان يرضى يطبع كل حرف لوحده وبعدين ييروح لسطر ال
         sleep
         وينام لخمسة وعشرين مللي ثانية*/
     }
     cout << endl;
 }
-// نعمل دالة عشان اغير لون الخط في الكونسول
-int setcolor (int color)
+/* نعمل دالة عشان اغير لون الخط في الكونسول */
+void setcolor (int color)
 {
     SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), color);
-    return 7;
     /*GetStdHandle
     STD_OUTPUT_HANDLE دي عبارة عن دالة بتشبك في الي الاوتبوب اللي طالع في الكونسول عشان تغير فيه حاجة وفي حالتناي دي اسمه بشكل مؤقت
     SetConsoleTextAttribute وبعد كده بتدخله في
-    
+
     SetConsoleTextAttribute
 دي بقى دالة جاهزة في مكتبة الويندوز بتاخد برامترين الاول الحاجة اللي عايز تلونها والتاني رقم اللون اللي انتي عايزه*/
 
-//لازم بقى دالة تتشك على الان بوت انه رقم ومش حاجة تاني
+    /*الا بقى دالة تتشك على الان بوت انه رقم ومش حاجة تاني*/
 }
 bool isValidNumber(int &num)
 {
@@ -57,7 +58,7 @@ void InventoryManagement()
     map
     بدل ما تعرف كل متغير لوحده*/
     // لو عايزة تضيفي حاجة يا ميري ضيفي!!
-    map<string, int> inventory =
+    map <string, int> inventory =
     {
         {"chicken", 1000},
         {"rice", 100},
@@ -77,7 +78,6 @@ void InventoryManagement()
     }
 }
 
-}
 
 int main()
 {
@@ -104,7 +104,7 @@ int main()
             break;
         }
         else
-        {
+        {  setcolor(4);
             cout << "Invalid input! Please enter a valid number.\n";
         }
     }
