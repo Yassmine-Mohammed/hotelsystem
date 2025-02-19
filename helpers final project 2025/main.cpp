@@ -496,24 +496,27 @@ void roommanegment()
     //عدد ليالي الاقامة
     int nights = calculateNights(day, month, year, day2, month2, year2);
     nights_number = nights;
+    cin.ignore();
+    cout<<"Press Enter to show ypur bill";
+    cin.get();
 
     if (nights != -1)
     {
         system("cls");
         setcolor(6);
         typetext("========== The Bill ==========\n\n");
-        cout<<"Room number: "<< room << endl;
+        cout<<"Room number: "<< room << endl<<endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
-        cout<<"date of arrival: "<< day <<" / "<<month<<" / "<<year << endl;
+        cout<<"date of arrival: "<< day <<" / "<<month<<" / "<<year << endl<<endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
-        cout<<"date of exit: "<< day2<<" / "<<month2<<" / "<<year2 << endl;
+        cout<<"date of exit: "<< day2<<" / "<<month2<<" / "<<year2 << endl<<endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
         cout<<"Total nights stayed: "<< nights << endl;
         totalroomprice(nights,roomrent);
-        cout<<  "Total price: "<< totalroomprice(nights,roomrent)<<endl;
+        cout<<  "Total price: "<< totalroomprice(nights,roomrent)<<endl<<endl;
         this_thread::sleep_for(chrono::milliseconds(100));
         total_price_room_stay = totalroomprice(nights,roomrent);
 
@@ -621,4 +624,3 @@ int main()
     }
     return 0;
 }
-//الحمدلله الذي تتم بنعمته الصالحات بجد بقى !!!!!!
