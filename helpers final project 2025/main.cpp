@@ -44,7 +44,7 @@ void setcolor (int color)
     SetConsoleTextAttribute
     دي بقى دالة جاهزة في مكتبة الويندوز بتاخد برامترين الاول الحاجة اللي عايز تلونها والتاني رقم اللون اللي انتي عايزه*/
 
-    /*الا بقى دالة تتشك على الان بوت انه رقم ومش حاجة تاني*/
+    //الا بقى دالة تتشك على الان بوت انه رقم ومش حاجة تاني/
 }
 bool isValidNumber(int &num, int min, int max)
 //تاكد ان الرقم رقم وبين الاختيارات اللي عايزينها
@@ -57,6 +57,25 @@ bool isValidNumber(int &num, int min, int max)
     }
     return true;
 }
+//عشان نطمن ع الشهر
+int getMonthNumber(string month)
+{
+    map<string, int> months =
+    {
+        {"January", 1}, {"February", 2}, {"March", 3}, {"April", 4},
+        {"May", 5}, {"June", 6}, {"July", 7}, {"August", 8},
+        {"September", 9}, {"October", 10}, {"November", 11}, {"December", 12}
+    };
+
+    if (isdigit(month[0]))   // لو دخل رقم
+    {
+        int num = stoi(month);
+        return isValidNumber(num, 1, 12) ? num : -1; // لازم يكون بين 1 و 12
+    }
+
+    return months.count(month) ? months[month] : -1; // لو كان اسم صحيح يرجعه، لو غلط -1
+}
+
 /*تعريف المتغيرات ب
 map
 بدل ما تعرف كل متغير لوحده*/
@@ -85,7 +104,7 @@ void InventoryManagement()
     setcolor(6);
     cout<<"\nPress Enter to show your bill";
     cin.ignore();
-     cin.get();
+    cin.get();
     int subTotal = total_price_food + total_price_room_stay; // المجموع قبل الضريبة
     double tax = subTotal * 0.10; // 10% ضريبة
     double grandTotal = subTotal + tax; // الإجمالي النهائي بعد الضريبة
@@ -237,7 +256,7 @@ void foodandbevareg ()
         cout<<"================ END ================";
     }
 }
-//نعمل دالة بتحسب عدد الايام وبالتالي هتحسب عدد الليالي
+//نعمل بتحول الشهور والسنين لايام
 int convertToDays(int day, string month, int year)
 {
     map<string, int> monthDays =
@@ -314,7 +333,8 @@ void roommanegment()
     typetext("The rooms from 1 to 10 are Standard.\n");
     typetext("The rooms from 11 to 20 are Deluxe.\n");
     typetext("The rooms from 21 to 30 are Suite.\n");
-
+    setcolor(6);
+    typetext("NOTEING that rooms '5','10','15','20','25'and '30'have two beds.\n");
     setcolor(2);
     typetext("Now I will show you the available room numbers and their prices per night in our hotel.\n\n");
     int rooms[10]= {5,7,8,10,11,12,15,20,22,25};
@@ -347,7 +367,7 @@ void roommanegment()
     while(1)
     {
         if(find(begin(rooms), end(rooms), room)!= end(rooms))
-            /*هنا بنعمل تشيك انه على رقم الاوضة اللي خدها في اراي الاوض المتاحة بدالة find*/
+            //هنا بنعمل تشيك انه على رقم الاوضة اللي خدها في اراي الاوض المتاحة بدالة find/
             //begin يعني دور من البداية
             //end يعني لحد النهاية
             //الدالة دي لو لقت الاوضة بترجع مكانها الاوضة لكن لو ملقتهاش هترجع انها وصلت لاخر المصفوفة وملقتهاش
@@ -407,7 +427,7 @@ void roommanegment()
 
                 roomrent = 200;
 
-                typetext("You choose room '12,\nits price 200 LE and its specifications are Single bed,Wardrobe,TV,Wi-Fi,Balcony with view,Daily Cleaning and Room Service\n");
+                typetext("You choose room '12',\nits price 200 LE and its specifications are Single bed,Wardrobe,TV,Wi-Fi,Balcony with view,Daily Cleaning and Room Service\n");
 
                 break;
             }
@@ -460,13 +480,36 @@ void roommanegment()
         }
     }
     //نبدأ ناخد تاريخ الوصول
-    int day,year;
-    string month;
+    int day,year,month;//بما ان صعب نتحقق من الشهر كسترينج فاحنا نريح دماغنا ونحوله لانتجر وخلاص
+    string monthStr;
 
     cout<<"Please, enter arrival date (day , month and year).\n\n";
     setcolor(7);
-    cin>>day>>month>>year;
-    //نتأكد منه
+    cin>>day;
+    //نتأكد من اليوم
+
+    while (!isValidNumber(day,1,31))
+    {
+
+        setcolor(4);
+        typetext("Inter a valid day,between 1 and 31.");
+        setcolor(7);
+        cin>>day;
+    }
+
+    cin >> monthStr;//ندخله كسترينج
+    month = getMonthNumber(monthStr);//هنا حولناه لانتجر
+    while (month == -1)
+    {
+        setcolor(4);
+        cout << "Enter a valid month (1-12 or full name): ";
+        setcolor(7);
+        cin >> monthStr;
+        month = getMonthNumber(monthStr);
+    }
+
+    cin>>year;
+    //نتأكد من السنة
     while(!isValidNumber (year,2025,2030))
     {
         setcolor(4);
@@ -474,27 +517,51 @@ void roommanegment()
         setcolor(7);
         cin>>year;
     }
-    cout<<"the arrival date you entered is:"<<" "<<day<<" "<<month<<" "<<year<<"\n\n";
+    cout<<"the arrival date you entered is:"<<" "<<day<<" / "<<month<<" / "<<year<<"\n\n";
 
     //ناخد تاريخ الرحيل
-    int day2,year2;
-    string month2;
+    //نفس الكلام
+    int day2,year2,month2;
+    string month2Str;
     setcolor(2);
     cout<<"please,enter exit date (day , month and year).\n\n";
+    cin>>day2;
     setcolor(7);
-    cin>>day2>>month2>>year2;
-    while(!isValidNumber (year2,2025,2030) || year2 < year || year2 == year && stoi(month2) < stoi(month) || year2 == year && stoi(month2) == stoi(month) && day2<day)
+    while (!isValidNumber(day2,1,31))
+    {
+
+        setcolor(4);
+        typetext("Inter a valid day,between 1 and 31.");
+        setcolor(7);
+        cin>>day;
+    }
+    cin>>month2Str;
+//نتحقق من الشهر
+    month2 = getMonthNumber(month2Str);
+    while (month2 == -1)
+    {
+        setcolor(4);
+        cout << "Enter a valid month (1-12 or full name): ";
+        setcolor(7);
+        cin >> month2Str;
+        month2 = getMonthNumber(month2Str);
+    }
+
+    cin>>year2;
+    while(!isValidNumber (year2,2025,2030) || year2 < year || year2 == year && stoi(month2Str) < stoi(monthStr) || year2 == year && stoi(month2Str) == stoi(monthStr) && day2<day)
     {
         setcolor(4);
         typetext("Inter a valid year,between 2025 and 2030.");
         setcolor(7);
         cin>>year2;
     }
-    cout<<"the exit date you entered is:"<<" "<<day2<<" "<<month2<<" "<<year2<<"\n\n";
+    cout<<"the exit date you entered is:"<<" "<<day2<<" / "<<month2<<" / "<<year2<<"\n\n";
+    setcolor(11);
+    typetext("Your reservation is confirmed, if you need any assistance please do not hesitate to contact us. Enjoy your stay!\n");
 
     //اعتذر يا بشمهندسة هتحشر هنا بردوه
     //عدد ليالي الاقامة
-    int nights = calculateNights(day, month, year, day2, month2, year2);
+    int nights = calculateNights(day, monthStr, year, day2, month2Str, year2);
     nights_number = nights;
     cin.ignore();
     cout<<"Press Enter to show ypur bill";
