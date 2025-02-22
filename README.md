@@ -1,36 +1,56 @@
 # Hotel Management System
 
-## Overview
-This Hotel Management System is a console-based application developed as part of the Winter Camp 2025 project. It is designed to handle essential hotel operations such as inventory management, billing, room reservations, and food & beverage orders. The focus of the project is on functional programming and clean, straightforward code.
+A console-based Hotel Management System built in C++ as part of the Winter Camp 2025 project. Developed by **Zero-One Developers**.
 
 ## Features
-- **Inventory Management:** Track and update hotel supplies (e.g., food ingredients) in real-time.
-- **Billing System:** Calculate and generate invoices including room charges and restaurant orders with tax.
-- **Room Reservation:** Manage room booking details and calculate the total cost based on stay duration.
-- **Food and Beverage Orders:** Display a menu, process meal orders, and update the inventory accordingly.
-- **Interactive Console Interface:** Utilizes text effects (e.g., typewriter effect and color changes) to enhance user experience.
+- **Inventory Management**: Track available stock in the hotel.
+- **Billing System**: Generate invoices for customers.
+- **Room Booking**: Manage room reservations.
+- **Buffet Management**: Keep records of food orders and availability.
 
-## Technologies Used
-- **C++** (Console-based implementation)
-- **Standard Libraries:** `iostream`, `map`, `algorithm`, `thread`, and `chrono`
-
-## How to Run
-### Clone the repository:
-```sh
-git clone https://github.com/Yassmine/Hotel-Management-System.git
+## Project Structure
 ```
-### Compile the code using a C++ compiler:
-```sh
-g++ main.cpp -o hotel_management
-```
-### Run the executable:
-```sh
-./hotel_management
+Hotel-Management-System/
+│-- src/
+│   │-- main.cpp           # Entry point of the application
+│   │-- inventory.cpp      # Handles stock management
+│   │-- billing.cpp        # Handles invoice generation
+│   │-- booking.cpp        # Manages room reservations
+│   │-- buffet.cpp         # Manages food orders
+│-- include/
+│   │-- inventory.h
+│   │-- billing.h
+│   │-- booking.h
+│   │-- buffet.h
+│-- README.md              # Project documentation
+│-- Makefile (optional)    # Compilation instructions
 ```
 
-## Future Enhancements
-- Develop a graphical user interface (GUI) for improved usability.
-- Introduce persistent data storage to save inventory and reservation details.
-- Add advanced error handling and user input validation.
+## How to Use
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/yourusername/hotel-management-system.git
+   cd hotel-management-system
+   ```
+2. **Compile the project** (if using g++)
+   ```sh
+   g++ -o hotel_management src/*.cpp
+   ```
+3. **Run the application**
+   ```sh
+   ./hotel_management
+   ```
+4. **Follow the on-screen instructions** to navigate the system.
 
-This project is a stepping stone toward real-world software development, emphasizing practical programming skills and user interaction via a console application. Contributions and feedback are always welcome! 🚀
+## Requirements
+- C++ Compiler (G++ recommended)
+- A terminal/command prompt to run the application
+
+## Contributors
+- **Yassmine** - Inventory, Billing, Main Interface
+- **Asmaa Khalaf** - Room Booking
+- **Mery Nabeh** - Buffet Management
+
+---
+### Notes
+This project is purely console-based and does not include a graphical interface. The focus is on implementing core functionalities in C++.
