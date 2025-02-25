@@ -517,7 +517,7 @@ void roommanegment()
             setcolor(7);
             cin>>year;
         }
-        setcolor(10);
+        setcolor(7);
         cout<<"the arrival date you entered is:"<<" "<<day<<" / "<<month<<" / "<<year<<"\n";
 
         cout<<"Are you sure? No (Enter 0), Yes (Enter any other key)\n";
@@ -586,6 +586,8 @@ void roommanegment()
 
         }
         while (year2 < year || (year2 == year && month2 < month) || (year2 == year && month2 == month && day2 <= day));
+        setcolor(7);
+
 
         cout<<"the exit date you entered is:"<<" "<<day2<<" / "<<month2Str<<" / "<<year2<<"\n";
 
