@@ -1,14 +1,14 @@
 # Hotel Management System
 
-A console-based Hotel Management System built in C++ as part of the Winter Camp 2025 project. Developed by **Zero-One Developers**.
+A **console-based** Hotel Management System built in **C++** as part of the **Winter Camp 2025** project. This project is developed by **Zero-One Developers**, focusing on core hotel operations like inventory, billing, room booking, and buffet management.
 
-## Features
-- **Inventory Management**: Track available stock in the hotel.
-- **Billing System**: Generate invoices for customers.
-- **Room Booking**: Manage room reservations.
-- **Buffet Management**: Keep records of food orders and availability.
+## 🚀 Features
+- **Inventory Management** 📦 – Tracks available stock and ensures proper management of hotel resources.
+- **Billing System** 💰 – Generates invoices for customers based on their usage and purchases.
+- **Room Booking** 🏨 – Manages guest reservations, check-ins, and check-outs efficiently.
+- **Buffet Management** 🍽️ – Keeps records of food orders and buffet availability.
 
-## Project Structure
+## 📁 Project Structure
 ```
 Hotel-Management-System/
 │-- src/
@@ -23,34 +23,54 @@ Hotel-Management-System/
 │   │-- booking.h
 │   │-- buffet.h
 │-- README.md              # Project documentation
-│-- Makefile (optional)    # Compilation instructions
+│-- Makefile               # Compilation instructions (if available)
 ```
 
-## How to Use
-1. **Clone the repository**
+## 🔧 How to Use
+1️⃣ **Clone the repository**
    ```sh
    git clone https://github.com/yourusername/hotel-management-system.git
    cd hotel-management-system
    ```
-2. **Compile the project** (if using g++)
+2️⃣ **Compile the project** (using g++)
    ```sh
    g++ -o hotel_management src/*.cpp
-   ```
-3. **Run the application**
+   ```  
+   *OR, if a `Makefile` is provided, just run:*
+   ```sh
+   make
+   ```  
+
+3️⃣ **Run the application**
    ```sh
    ./hotel_management
-   ```
-4. **Follow the on-screen instructions** to navigate the system.
+   ```  
+4️⃣ **Follow the on-screen instructions** to navigate through the system.
 
-## Requirements
-- C++ Compiler (G++ recommended)
-- A terminal/command prompt to run the application
+## 🛠️ Input Validation
+The system includes input validation to ensure correct data entry and prevent invalid operations. This includes:
+- Checking if the **departure date** is after the **arrival date**.
+- Allowing users to **review and edit** entered dates before finalizing.
+- Preventing incorrect or missing input fields.
 
-## Contributors
-- **Yassmine** - Inventory, Billing, Main Interface
-- **Asmaa Khalaf** - Room Booking
-- **Mery Nabeh** - Buffet Management
+## 📌 Requirements
+- **C++ Compiler** (e.g., G++)
+- **Terminal/Command Prompt** for execution
+
+## 👥 Contributors
+- **Yassmine** – Inventory, Billing, Main Interface
+- **Asmaa Khalaf** – Room Booking
+- **Mery Nabeh** – Buffet Management
 
 ---
-### Notes
-This project is purely console-based and does not include a graphical interface. The focus is on implementing core functionalities in C++.
+
+## 🔮 Future Plans
+We plan to enhance the system by adding:
+- **Leap Year Handling** 📅 – Ensure accurate date validation for leap years.
+- **Multiple Payment Methods** 💳 – Support for credit cards, PayPal, and other payment options.
+- **Graphical User Interface (GUI)** 🖥️ – Transition from a console-based system to a user-friendly graphical interface.
+
+---
+### ℹ️ Notes
+- This project is purely **console-based** and does **not** include a graphical interface.
+- The primary focus is on implementing structured and efficient **C++ code** for hotel management operations.
