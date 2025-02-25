@@ -11,6 +11,8 @@
 //مكتبة الماب
 #include <algorithm>
 // ضرورية لاستخدام find
+#include <iomanip>
+//ضروري عشان نضيف دالة setw اللي بتظبط المسافات بين الكلمات
 using namespace std;
 int total_price_food;
 int total_price_room_stay;
@@ -46,6 +48,9 @@ bool isValidNumber(int &num, int min, int max)
 //تاكد ان الرقم رقم وبين الاختيارات اللي عايزينها
 {
     if (cin.fail() || cin.peek() != '\n' || num < min || num > max)
+        /*cin.fail() بيتأكد إن المدخل مش نص
+        cin.clear(); → بيصلح حالة الخطأ لو المستخدم دخل حاجة غلط.
+        cin.ignore(10000, '\n'); → بيتخلص من أي حروف أو مدخلات غير صحيحة.*/
     {
         cin.clear();
         cin.ignore(10000, '\n');
@@ -93,10 +98,17 @@ int totalfoodcost(int price, int quantity)
 }
 void InventoryManagement()
 {
-    for (const auto& item : inventory)
-    {
-        cout << item.first << ": " << item.second << " unit(s)\n";
+    cout << "\n=========== ========= ===========" << endl;
+    setcolor(13);
+    cout << left << setw(15) << "Item" << "Quantity" << endl;
+    cout << "---------------------------------" << endl;
+
+    for (const auto& item : inventory) {
+        cout << left << setw(15) << item.first << item.second << " unit(s)\n";
     }
+
+    cout << "=================================\n";
+
     setcolor(6);
     cout<<"\nPress Enter to show your bill";
     cin.ignore();
@@ -108,12 +120,12 @@ void InventoryManagement()
     cout << "\n========================================\n";
     cout << "          FINAL HOTEL INVOICE           \n";
     cout << "========================================\n";
-    cout << "Total Room Cost: " << total_price_room_stay << " LE\n";
-    cout << "Total Restaurant Cost: " << total_price_food << " LE\n";
-    cout << "Subtotal: " << subTotal << " LE\n";
-    cout << "Tax (10%): " << tax << " LE\n";
+    cout << left << setw(25) << "Total Room Cost:" << total_price_room_stay << " LE\n";
+    cout << left << setw(25) << "Total Restaurant Cost:" << total_price_food << " LE\n";
+    cout << left << setw(25) << "Subtotal:" << subTotal << " LE\n";
+    cout << left << setw(25) << "Tax (10%):" << tax << " LE\n";
     cout << "----------------------------------------\n";
-    cout << "TOTAL BILL: " << grandTotal << " LE\n";
+    cout << left << setw(25) << "TOTAL BILL:" << grandTotal << " LE\n";
     cout << "========================================\n";
 
 
@@ -206,11 +218,14 @@ void foodandbevareg ()
     //الفاتورة
     total_price_food = totalfoodcost(price,quantity);
 
-    cout << "\n=========== Bill ===========\n";
-    cout << "Meal: " << mealName << endl;
-    cout << "Quantity: " << quantity << endl;
-    cout << "Total Cost: " << totalfoodcost(price,quantity) << " LE" << endl;
-    cout << "======================================\n";
+    cout << "\n========== Bill ==========\n";
+    cout << left << setw(10) << "Meal: " << mealName << endl;
+    cout << left << setw(10) << "Quantity: " << quantity << endl;
+    cout << left << setw(10) << "Total Cost: " << totalfoodcost(price, quantity) << " LE" << endl;
+    //استخدام left: لمحاذاة النص إلى اليسار.
+
+    cout << "==========================\n";
+
     //نستأذنك يا بشمهندسة هناخد كام حاجة من عندك
     for( int j=0; j<4; j++)
     {
@@ -609,26 +624,29 @@ void roommanegment()
     cin.ignore();
     cout<<"Press Enter to show your bill";
     cin.get();
+    //بوقف البرنامج لحد ما يضغط انتر
 
     if (nights != -1)
     {
         system("cls");
         setcolor(6);
-        typetext("========== The Bill ==========\n\n");
-        cout<<"Room number: "<< room << endl<<endl;
+        double totalPrice = totalroomprice(nights, roomrent);
+        total_price_room_stay = totalPrice;
+        cout << "========== The Bill ==========\n\n";
+        cout << left << setw(20) << "Room number:" << room << endl << endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
-        cout<<"date of arrival: "<< day <<" / "<<month<<" / "<<year << endl<<endl;
+        cout << left << setw(20) << "Date of arrival:" << day << " / " << month << " / " << year << endl << endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
-        cout<<"date of exit: "<< day2<<" / "<<month2<<" / "<<year2 << endl<<endl;
+        cout << left << setw(20) << "Date of exit:" << day2 << " / " << month2 << " / " << year2 << endl << endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
-        cout<<"Total nights stayed: "<< nights << endl;
-        totalroomprice(nights,roomrent);
-        cout<<  "Total price: "<< totalroomprice(nights,roomrent)<<endl<<endl;
+        cout << left << setw(20) << "Total nights stayed:" << nights << endl;
         this_thread::sleep_for(chrono::milliseconds(100));
-        total_price_room_stay = totalroomprice(nights,roomrent);
+
+        cout << left << setw(20) << "Total price:" << totalPrice << " LE" << endl << endl;
+        this_thread::sleep_for(chrono::milliseconds(100));
 
     }
 
@@ -652,18 +670,17 @@ void bill ()
     int subTotal = total_price_food + total_price_room_stay; // المجموع قبل الضريبة
     double tax = subTotal * 0.10; // 10% ضريبة
     double grandTotal = subTotal + tax; // الإجمالي النهائي بعد الضريبة
-
+    setcolor(6);
     cout << "\n========================================\n";
     cout << "          FINAL HOTEL INVOICE           \n";
     cout << "========================================\n";
-    cout << "Total Room Cost: " << total_price_room_stay << " LE\n";
-    cout << "Total Restaurant Cost: " << total_price_food << " LE\n";
-    cout << "Subtotal: " << subTotal << " LE\n";
-    cout << "Tax (10%): " << tax << " LE\n";
+    cout << left << setw(30) << "Total Room Cost:" << total_price_room_stay << " LE\n";
+    cout << left << setw(30) << "Total Restaurant Cost:" << total_price_food << " LE\n";
+    cout << left << setw(30) << "Subtotal:" << subTotal << " LE\n";
+    cout << left << setw(30) << "Tax (10%):" << tax << " LE\n";
     cout << "----------------------------------------\n";
-    cout << "TOTAL BILL: " << grandTotal << " LE\n";
+    cout << left << setw(30) << "TOTAL BILL:" << grandTotal << " LE\n";
     cout << "========================================\n";
-
 }
 int main()
 {
@@ -674,7 +691,7 @@ int main()
     setcolor(9);
 
     typetext("2. Food and Beverage Management.\n");
-    setcolor(13);
+    setcolor(5);
 
     typetext("3. Inventory Management. \n");
 
@@ -722,12 +739,12 @@ int main()
         cout << "\n========================================\n";
         cout << "          FINAL HOTEL INVOICE           \n";
         cout << "========================================\n";
-        cout << "Total Room Cost: " << 0 << " LE\n";
-        cout << "Total Restaurant Cost: " << 0 << " LE\n";
-        cout << "Subtotal: " << 0 << " LE\n";
-        cout << "Tax (10%): " << 0 << " LE\n";
+        cout << left << setw(30) << "Total Room Cost:" << 0 << " LE\n";
+        cout << left << setw(30) << "Total Restaurant Cost:" << 0 << " LE\n";
+        cout << left << setw(30) << "Subtotal:" << 0 << " LE\n";
+        cout << left << setw(30) << "Tax (10%):" << 0 << " LE\n";
         cout << "----------------------------------------\n";
-        cout << "TOTAL BILL: " << 0 << " LE\n";
+        cout << left << setw(30) << "TOTAL BILL:" << 0 << " LE\n";
         cout << "========================================\n";
 
     }
