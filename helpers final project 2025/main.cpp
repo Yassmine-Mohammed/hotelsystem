@@ -12,11 +12,7 @@
 #include <algorithm>
 // ضرورية لاستخدام find
 using namespace std;
-string meal_name;
-int the_quantity;
 int total_price_food;
-int room_numeber;
-int nights_number;
 int total_price_room_stay;
 
 // ولأني انسان موسوس جبت دالة بتعمل ستايل للكتابة عشان يبقى شكلها حلو
@@ -178,24 +174,20 @@ void foodandbevareg ()
     {
     case 1:
         mealName = "Breakfast Meal";
-        meal_name= "Breakfast Meal";
         price = prices[0];
         break;
     case 2:
         mealName = "Lunch Meal";
-        meal_name= "Lunch Meal";
 
         price = prices[1];
         break;
     case 3:
         mealName = "Dinner Meal";
-        meal_name=  "Dinner Meal";
 
         price = prices[2];
         break;
     case 4:
         mealName = "Snacks";
-        meal_name=  "Snacks";
 
         price = prices[3];
         break;
@@ -203,7 +195,6 @@ void foodandbevareg ()
 
     cout << "Enter the quantity: ";
     cin >> quantity;
-    the_quantity =quantity;
     while (!isValidNumber(quantity, 1, 100))
     {
         setcolor(4);
@@ -476,95 +467,145 @@ void roommanegment()
             typetext("Sorry sir, This room is not available, Please choose another.");
             setcolor(7);
             cin>>room;
-            room_numeber=room;
         }
     }
     //نبدأ ناخد تاريخ الوصول
     int day,year,month;//بما ان صعب نتحقق من الشهر كسترينج فاحنا نريح دماغنا ونحوله لانتجر وخلاص
     string monthStr;
-
-    cout<<"Please, enter arrival date (day , month and year).\n\n";
-    setcolor(7);
-    cin>>day;
-    //نتأكد من اليوم
-
-    while (!isValidNumber(day,1,31))
+    //نعمل دو وايل عشان نتشك اذا كان اليوزر كتب التاريخ صح ولو لا هيعيد اللوب من الاول
+    int chickdate;
+    do
     {
-
-        setcolor(4);
-        typetext("Inter a valid day,between 1 and 31.");
+        setcolor(7);
+        cout<<"Please, Enter arrival date (day , month and year).\n\n";
+        setcolor(2);
+        cout<<"Enter arrival Day (it must be a number between 1 and 31).\n";
         setcolor(7);
         cin>>day;
-    }
+        //نتأكد من اليوم
+        while (!isValidNumber(day,1,31))
+        {
 
-    cin >> monthStr;//ندخله كسترينج
-    month = getMonthNumber(monthStr);//هنا حولناه لانتجر
-    while (month == -1)
-    {
-        setcolor(4);
-        cout << "Enter a valid month (1-12 or full name): ";
+            setcolor(4);
+            typetext("Inter a valid day,between 1 and 31.\n");
+            setcolor(7);
+            cin>>day;
+        }
+
+        setcolor(2);
+        cout << "Enter arrival Month (full name, e.g., January): \n";
         setcolor(7);
-        cin >> monthStr;
-        month = getMonthNumber(monthStr);
-    }
-
-    cin>>year;
-    //نتأكد من السنة
-    while(!isValidNumber (year,2025,2030))
-    {
-        setcolor(4);
-        typetext("Inter a valid year,between 2025 and 2030.");
+        cin >> monthStr;//ندخله كسترينج
+        month = getMonthNumber(monthStr);//هنا حولناه لانتجر
+        while (month == -1)
+        {
+            setcolor(4);
+            cout << "Enter a valid month (1-12 or full name): \n";
+            setcolor(7);
+            cin >> monthStr;
+            month = getMonthNumber(monthStr);
+        }
+        setcolor(2);
+        cout << "Enter arrival year ( It must be a number between 2025-2030): \n";
         setcolor(7);
         cin>>year;
+        //نتأكد من السنة
+        while(!isValidNumber (year,2025,2030))
+        {
+            setcolor(4);
+            typetext("Inter a valid year,between 2025 and 2030.\n");
+            setcolor(7);
+            cin>>year;
+        }
+        setcolor(10);
+        cout<<"the arrival date you entered is:"<<" "<<day<<" / "<<month<<" / "<<year<<"\n";
+
+        cout<<"Are you sure? No (Enter 0), Yes (Enter any other key)\n";
+
+        setcolor(7);
+        cin>>chickdate;
+        cout<<endl;
     }
-    cout<<"the arrival date you entered is:"<<" "<<day<<" / "<<month<<" / "<<year<<"\n\n";
+    while(!chickdate);
 
     //ناخد تاريخ الرحيل
-    //نفس الكلام
+    //نفس الكلام بس نخلي بالنا إن تاريخ الذهاب لازم يكون بعد تاريخ العودة فهنعمل do while
     int day2,year2,month2;
     string month2Str;
-    setcolor(2);
-    cout<<"please,enter exit date (day , month and year).\n\n";
-    cin>>day2;
-    setcolor(7);
-    while (!isValidNumber(day2,1,31))
+    int chickexitdate;//عشان حبيت الحكاية هيهيهيهي
+    do
     {
+        do
+        {
+            setcolor(7);
+            cout<<"Please, Enter exit date (day , month and year).\n";
+            setcolor(6);
+            typetext("The exist date must be after the arrival date.\n");
 
-        setcolor(4);
-        typetext("Inter a valid day,between 1 and 31.");
-        setcolor(7);
-        cin>>day;
-    }
-    cin>>month2Str;
-//نتحقق من الشهر
-    month2 = getMonthNumber(month2Str);
-    while (month2 == -1)
-    {
-        setcolor(4);
-        cout << "Enter a valid month (1-12 or full name): ";
-        setcolor(7);
-        cin >> month2Str;
-        month2 = getMonthNumber(month2Str);
-    }
+            setcolor(2);
+            cout<<"Please,Enter exit date Day (it must be a number between 1 and 31).\n";
+            setcolor(7);
+            cin>>day2;
+            //نتأكد من رقم اليوم
+            while (!isValidNumber(day2,1,31))
+            {
 
-    cin>>year2;
-    while(!isValidNumber (year2,2025,2030) || year2 < year || year2 == year && stoi(month2Str) < stoi(monthStr) || year2 == year && stoi(month2Str) == stoi(monthStr) && day2<day)
-    {
-        setcolor(4);
-        typetext("Inter a valid year,between 2025 and 2030.");
+                setcolor(4);
+                typetext("Inter a valid day,between 1 and 31.");
+                setcolor(7);
+                cin>>day2;
+            }
+
+            setcolor(2);
+            cout << "Enter exit month (full name, e.g., January): \n";
+            setcolor(7);
+            cin>>month2Str;
+            month2 = getMonthNumber(month2Str);
+            //نتحقق من الشهر
+            while (month2 == -1)
+                //تذكر أن الفانكشن بتاعت جيت مانث هترجع سالب واحد لو اليوزر دخل رقم او اسم مش موجود في شهور ربنا اللي فوق في الدالة
+            {
+                setcolor(4);
+                cout << "Enter a valid month (1-12 or full name): \n";
+                setcolor(7);
+                cin >> month2Str;
+                month2 = getMonthNumber(month2Str);
+            }
+            setcolor(2);
+            cout << "Enter exit year ( It must be a number between 2025-2030 and after or equal to arrival year): \n";
+            setcolor(7);
+            cin>>year2;
+            //نتشك على السنة
+            while(!isValidNumber (year2,2025,2030))
+            {
+                setcolor(4);
+                typetext("Inter a valid year,between 2025 and 2030.\n");
+                setcolor(7);
+                cin>>year2;
+            }
+
+        }
+        while (year2 < year || (year2 == year && month2 < month) || (year2 == year && month2 == month && day2 <= day));
+
+        cout<<"the exit date you entered is:"<<" "<<day2<<" / "<<month2Str<<" / "<<year2<<"\n";
+
+        cout<<"Are you sure? No (Enter 0), Yes (Enter any other key)\n";
+
         setcolor(7);
-        cin>>year2;
+        cin>>chickexitdate;
+        cout<<endl;
+
     }
-    cout<<"the exit date you entered is:"<<" "<<day2<<" / "<<month2<<" / "<<year2<<"\n\n";
+    while (!chickexitdate);
+
     setcolor(11);
-    typetext("Your reservation is confirmed, if you need any assistance please do not hesitate to contact us. Enjoy your stay!\n");
+    typetext("Your reservation is confirmed, if you need any assistance please do not hesitate to contact us.\n Enjoy your stay!\n");
 
     //اعتذر يا بشمهندسة هتحشر هنا بردوه
     //عدد ليالي الاقامة
     int nights = calculateNights(day, monthStr, year, day2, month2Str, year2);
-    nights_number = nights;
     cin.ignore();
-    cout<<"Press Enter to show ypur bill";
+    cout<<"Press Enter to show your bill";
     cin.get();
 
     if (nights != -1)
@@ -589,7 +630,7 @@ void roommanegment()
 
     }
 
-    typetext("If you want to order your meal, Please inter 0, otherwise press any key");
+    typetext("If you want to book a meal, Please inter 0, otherwise press any key");
     int chick2;
     cin>>chick2;
     if(chick2==0)
