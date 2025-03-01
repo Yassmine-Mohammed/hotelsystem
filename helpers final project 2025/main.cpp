@@ -340,7 +340,7 @@ void roommanegment()
     typetext("The rooms from 11 to 20 are Deluxe.\n");
     typetext("The rooms from 21 to 30 are Suite.\n");
     setcolor(6);
-    typetext("NOTEING that rooms '5','10','15','20','25'and '30'have two beds.\n");
+    typetext("NOTEING that rooms '10','15','20','25'and '30'have two beds.\n");
     setcolor(2);
     typetext("Now I will show you the available room numbers and their prices per night in our hotel.\n\n");
     int rooms[10]= {5,7,8,10,11,12,15,20,22,25};
