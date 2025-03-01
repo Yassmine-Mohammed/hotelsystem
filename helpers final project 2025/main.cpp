@@ -622,6 +622,7 @@ void roommanegment()
     //عدد ليالي الاقامة
     int nights = calculateNights(day, monthStr, year, day2, month2Str, year2);
     cin.ignore();
+    //يتاكد ان مفيش اي شوائب في البافر
     cout<<"Press Enter to show your bill";
     cin.get();
     //بوقف البرنامج لحد ما يضغط انتر
@@ -642,7 +643,7 @@ void roommanegment()
         cout << left << setw(20) << "Date of exit:" << day2 << " / " << month2 << " / " << year2 << endl << endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
-        cout << left << setw(20) << "Total nights stayed:" << nights << endl;
+        cout << left << setw(20) << "Total nights stayed:" << nights << endl<<endl;
         this_thread::sleep_for(chrono::milliseconds(100));
 
         cout << left << setw(20) << "Total price:" << totalPrice << " LE" << endl << endl;
@@ -650,7 +651,7 @@ void roommanegment()
 
     }
 
-    typetext("If you want to book a meal, Please inter 0, otherwise press any key");
+    typetext("If you want to book a meal, Please enter 0 ,otherwise enter any key");
     int chick2;
     cin>>chick2;
     if(chick2==0)
